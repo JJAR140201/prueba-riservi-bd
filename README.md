@@ -1,82 +1,53 @@
-# Modelo de Datos para el Sistema de Reservaciones
+# Sistema de Reservaciones - Modelo, Base de Datos y Aplicaciones
 
-Este repositorio contiene el modelo de datos diseñado para gestionar un sistema de reservaciones. Se incluyen las entidades principales del sistema y las relaciones entre ellas, basadas en los requerimientos del sistema.
-
----
-
-## **Descripción del Modelo de Datos**
-
-El modelo de datos está compuesto por las siguientes entidades principales:
-
-1. **Clientes**:
-   - Representan a las personas que realizan reservaciones.
-   - Contienen información básica como nombre, correo electrónico y teléfono.
-
-2. **Reservaciones**:
-   - Almacenan los datos relacionados con cada reservación realizada por un cliente.
-   - Incluyen la fecha de la reservación, así como la relación con un horario reservado.
-
-3. **Horarios Disponibles**:
-   - Representan los horarios que pueden ser reservados.
-   - Incluyen información sobre la hora de inicio y fin de cada bloque horario.
-
-4. **Horario de Reservas**:
-   - Conectan los horarios disponibles con las reservaciones.
-   - Contienen un estado (`disponible` o `reservado`) para indicar si el horario está libre o ya está asignado.
+Este repositorio contiene el modelo de datos, el esquema de base de datos en MySQL y las consultas SQL diseñadas para gestionar un sistema de reservaciones. También incluye enlaces a los repositorios del backend y frontend del sistema.
 
 ---
 
-## **Relaciones Entre Entidades**
+## **Sección 1: Interpretación y Modelado de Requerimientos**
 
-### **Diagrama UML del Modelo**
+### **Descripción**
 
-A continuación, se presenta un diagrama UML que muestra las entidades y sus relaciones:
+El sistema de reservaciones está diseñado para gestionar los siguientes elementos:
+- **Clientes**
+- **Horarios Disponibles**
+- **Horarios de Reserva**
+- **Reservaciones**
+
+### **Modelo de Datos**
+
+El siguiente diagrama UML muestra las entidades y sus relaciones:
 
 ![Diagrama UML](UML-Prueba.png)
 
-### **Descripción de las Relaciones**
+### **Relaciones Principales**
 
 1. **Clientes y Reservaciones**:
    - Relación: **Uno a Muchos**.
-   - Un cliente puede realizar múltiples reservaciones, pero cada reservación pertenece a un solo cliente.
-   - Justificación: Permite gestionar fácilmente todas las reservaciones de un cliente.
+   - Cada cliente puede realizar varias reservaciones.
 
-2. **Reservaciones y Horario de Reservas**:
+2. **Reservaciones y Horarios de Reserva**:
    - Relación: **Uno a Uno**.
-   - Cada reservación está asociada a un único horario reservado, y cada horario reservado pertenece a una sola reservación.
-   - Justificación: Asegura que no haya conflictos al asociar reservaciones con horarios específicos.
+   - Cada reservación está asociada a un único horario reservado.
 
 3. **Horario de Reservas y Horarios Disponibles**:
    - Relación: **Muchos a Uno**.
-   - Varios horarios de reserva pueden estar asociados a un mismo horario disponible, dependiendo de cómo se configuren los bloques de tiempo.
-   - Justificación: Proporciona flexibilidad para reutilizar horarios disponibles en diferentes contextos.
+   - Varios horarios reservados pueden estar asociados a un horario disponible.
+
+**Criterios Evaluados:**
+- **Claridad y detalle del modelo**: Las relaciones entre entidades están bien definidas y justificadas.
+- **Coherencia en las relaciones**: Cada relación está diseñada para reflejar correctamente los requerimientos del sistema.
 
 ---
 
-## **Justificación del Diseño**
+## **Sección 3: Base de Datos MySQL**
 
-El diseño del modelo está basado en los siguientes principios:
+### **Esquema de Base de Datos**
 
-1. **Claridad y Organización**:
-   - Las entidades están diseñadas para representar conceptos del mundo real de manera clara y directa.
+El esquema de la base de datos implementado en MySQL está diseñado de acuerdo al modelo de datos definido. 
 
-2. **Integridad Referencial**:
-   - Las relaciones están definidas con claves foráneas para garantizar la consistencia de los datos.
+![Esquema MySQL](Schema-sql.png)
 
-3. **Escalabilidad**:
-   - El modelo permite la adición de nuevas entidades o atributos sin necesidad de una reestructuración significativa.
+### **Consultas SQL**
 
-4. **Evitar Conflictos de Reservaciones**:
-   - La relación entre `Reservaciones` y `Horario de Reservas` asegura que no se puedan asignar múltiples reservaciones al mismo horario.
-
----
-
-## **Criterios de Evaluación**
-
-1. **Claridad y Detalle del Modelo**:
-   - El modelo está diseñado para ser intuitivo y fácil de entender, con relaciones claramente definidas.
-
-2. **Coherencia en las Relaciones y Justificaciones**:
-   - Las relaciones entre las entidades son consistentes con los requerimientos funcionales del sistema.
-
----
+El archivo [consulta-sql.sql](consulta-sql.sql)
